@@ -8,6 +8,12 @@ export default class Http implements IHttp {
     request = (method: string, url: string, data = {}) => {
         return fetch("https://front-test.beta.aviasales.ru/" + url, {
             method
-        }).then(response => response.json());
+        }).then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                return response;
+            }
+        });
     };
 }
