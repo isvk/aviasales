@@ -4,3 +4,5 @@ import { getSearchId } from "src/store/search/selectors";
 
 export const searchState = (state: IStore) => state.search;
 export const searchGetSearchId = createSelector(searchState, getSearchId);
+
+export const ticketState = (state: IStore) => state.tickets;
