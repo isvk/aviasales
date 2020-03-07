@@ -1,0 +1,2 @@
+export const GET_SEARCH_ID = "GET_SEARCH_ID";
+export const GET_SEARCH_ID_SUCCESS = "GET_SEARCH_ID_SUCCESS";
