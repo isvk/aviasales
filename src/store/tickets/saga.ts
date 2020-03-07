@@ -1,11 +1,12 @@
 import bottle from "src/services";
-import { put, call, takeEvery } from "@redux-saga/core/effects";
+import { call, put, takeEvery, select } from "@redux-saga/core/effects";
 import * as types from "./types";
-import Ticket from "src/models/ticket";
-import { getTickets, addTickets } from "./actions";
 import { IApiTicket } from "src/services/api/apiTickets";
+import Ticket from "src/models/ticket";
+import { addTickets, getTickets, sortTickets } from "./actions";
 import { setStatus } from "src/store/search/actions";
 import { searchStatus } from "src/store/searchStatus";
+import { IStore } from "src/store/rootReducer";
 
 function* getTicketsAsync(services: typeof bottle, action: ReturnType<typeof getTickets>) {
     try {
@@ -15,6 +16,8 @@ function* getTicketsAsync(services: typeof bottle, action: ReturnType<typeof get
         if (response.tickets) {
             yield put(addTickets(response.tickets.map((ticket: IApiTicket) => new Ticket(ticket))));
             if (response.stop === true) {
+                const sort = yield select((state: IStore) => state.search.sort);
+                yield put(sortTickets(sort));
                 yield put(setStatus(searchStatus.completed));
             }
         }
