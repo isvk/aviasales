@@ -12,7 +12,7 @@ export default class Http implements IHttp {
             if (response.ok) {
                 return response.json();
             } else {
-                return response;
+                throw response;
             }
         });
     };

@@ -19,16 +19,16 @@ function* getTicketsAsync(services: typeof bottle, action: ReturnType<typeof get
                 const sort = yield select((state: IStore) => state.search.sort);
                 yield put(sortTickets(sort));
                 yield put(setStatus(searchStatus.completed));
+            } else {
+                yield put(getTickets(action.searchId));
             }
         }
-
-        if ((response.tickets && response.stop === false) || response.status === 500) {
+    } catch (e) {
+        if (e.status === 500) {
             yield put(getTickets(action.searchId));
         } else {
             yield put(setStatus(searchStatus.completed));
         }
-    } catch (e) {
-        console.error(e);
     }
 }
 
