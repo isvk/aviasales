@@ -10,8 +10,8 @@ export const searchGetSearchStatus = createSelector(searchState, getStatus);
 export const searchGetSearchSort = createSelector(searchState, getSort);
 
 export const ticketState = (state: IStore) => state.tickets;
-export const ticketsGetTicketsSort = (state: IStore) => {
-    return state.tickets.sort((a: Ticket, b: Ticket) => {
+export const ticketStateSort = (state: IStore) => {
+    state.tickets = state.tickets.sort((a: Ticket, b: Ticket) => {
         switch (state.search.sort) {
             case typeSort.time:
                 let a_duration = a.segments.from.duration + a.segments.to.duration;
@@ -27,4 +27,6 @@ export const ticketsGetTicketsSort = (state: IStore) => {
         }
         return 0;
     });
+    return state;
 };
+export const ticketsGetTicketsSort = createSelector(ticketStateSort, ticketState);
