@@ -44,5 +44,10 @@ export const ticketStateFilterNumberStops = (state: IStore) => {
     });
     return state;
 };
-
 export const ticketsGetTicketsFilter = createSelector(ticketStateFilterNumberStops, ticketState);
+
+export const ticketsGetTicketsFilterAndSort = createSelector(
+    ticketStateFilterNumberStops,
+    ticketStateSort,
+    ticketState
+);
