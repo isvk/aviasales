@@ -6,12 +6,14 @@ export interface ISearch {
     searchId: string;
     status: searchStatus;
     sort: typeSort;
+    filterNumberStops: string[] | undefined;
 }
 
 const initialSearch: ISearch = {
     searchId: "",
     status: searchStatus.notStarted,
-    sort: typeSort.price
+    sort: typeSort.price,
+    filterNumberStops: undefined
 };
 
 export default class Search extends Record(initialSearch) {}

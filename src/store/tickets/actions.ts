@@ -19,3 +19,9 @@ export const sortTickets = (typeSort: typeSort) =>
         type: types.SORT_TICKETS,
         typeSort
     } as const);
+
+export const filterNumberStops = (values: string[]) =>
+    ({
+        type: types.FILTER_NUMBER_STOPS,
+        values
+    } as const);
