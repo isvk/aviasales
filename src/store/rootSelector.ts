@@ -30,3 +30,19 @@ export const ticketStateSort = (state: IStore) => {
     return state;
 };
 export const ticketsGetTicketsSort = createSelector(ticketStateSort, ticketState);
+
+export const ticketStateFilterNumberStops = (state: IStore) => {
+    const filterNumberStops = state.search.filterNumberStops;
+    if (!filterNumberStops) return state;
+
+    state.tickets = state.tickets.filter((item: Ticket) => {
+        const arrayNumberStopsTicket = [
+            item.segments.from.stops.size.toString(),
+            item.segments.to.stops.size.toString()
+        ];
+        return arrayNumberStopsTicket.every(NumberStopsTicket => filterNumberStops.includes(NumberStopsTicket));
+    });
+    return state;
+};
+
+export const ticketsGetTicketsFilter = createSelector(ticketStateFilterNumberStops, ticketState);

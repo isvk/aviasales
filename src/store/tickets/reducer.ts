@@ -17,26 +17,6 @@ const reducer = (state: TStoreTicket = List([]), action: ActionTypesInfer<typeof
             });
             return state;
 
-        case types.FILTER_NUMBER_STOPS:
-            if (!action.values) return state;
-
-            let newState = state.clear();
-
-            state.forEach((item: Ticket) => {
-                let arrayNumberStopsItem = [
-                    item.segments.from.stops.size.toString(),
-                    item.segments.to.stops.size.toString()
-                ];
-
-                let difference = arrayNumberStopsItem.filter(x => !action.values.includes(x));
-                if (difference.length > 0) {
-                    item = item.set("visible", false);
-                }
-                newState = newState.push(item);
-            });
-
-            return newState;
-
         default:
             return state;
     }
