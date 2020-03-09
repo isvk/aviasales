@@ -3,7 +3,7 @@ import { ActionTypesInfer } from "src/store/actionTypes";
 import * as types from "./types";
 import * as actions from "./actions";
 import Ticket from "src/models/ticket";
-import { typeSort } from "../typeSort";
+import { typeSort } from "src/store/typeSort";
 
 export type TStoreTicket = List<Ticket>;
 
@@ -26,8 +26,8 @@ const reducer = (state: TStoreTicket = List([]), action: ActionTypesInfer<typeof
                 }
 
                 if (action.typeSort === typeSort.time) {
-                    let a_duration = a.segments[0].duration + a.segments[1].duration;
-                    let b_duration = b.segments[0].duration + b.segments[1].duration;
+                    let a_duration = a.segments.from.duration + a.segments.to.duration;
+                    let b_duration = b.segments.from.duration + b.segments.to.duration;
                     if (a_duration < b_duration) return -1;
                     if (a_duration > b_duration) return 1;
                 }

@@ -1,4 +1,8 @@
 import { IHttp } from "../IHttp";
+import Ticket from "src/models/ticket";
+import { List } from "immutable";
+import Segment from "src/models/segment";
+import Segments from "src/models/segments";
 
 export interface IApiTicket {
     price: number; // Цена в рублях
@@ -32,7 +36,31 @@ export default class ApiTicket {
 
     getTickets = (searchId: string) => {
         return this.http.get(this.url + "?searchId=" + searchId).then((response: IApiTickets) => {
-            return response;
+            return {
+                tickets: response.tickets.map((ticket: IApiTicket) => {
+                    return new Ticket({
+                        price: ticket.price,
+                        carrier: ticket.carrier,
+                        segments: new Segments({
+                            from: new Segment({
+                                origin: ticket.segments[0].origin,
+                                destination: ticket.segments[0].destination,
+                                date: ticket.segments[0].date,
+                                stops: List(ticket.segments[0].stops),
+                                duration: ticket.segments[0].duration
+                            }),
+                            to: new Segment({
+                                origin: ticket.segments[1].origin,
+                                destination: ticket.segments[1].destination,
+                                date: ticket.segments[1].date,
+                                stops: List(ticket.segments[1].stops),
+                                duration: ticket.segments[1].duration
+                            })
+                        })
+                    });
+                }),
+                stop: response.stop
+            };
         });
     };
 }
