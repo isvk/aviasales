@@ -1,10 +1,9 @@
 import bottle from "src/services";
-import { call, put, takeEvery, select } from "@redux-saga/core/effects";
+import { call, put, takeEvery } from "@redux-saga/core/effects";
 import * as types from "./types";
-import { addTickets, getTickets, sortTickets } from "./actions";
+import { addTickets, getTickets } from "./actions";
 import { setStatus } from "src/store/search/actions";
 import { searchStatus } from "src/store/searchStatus";
-import { searchGetSearchSort } from "src/store/rootSelector";
 
 function* getTicketsAsync(services: typeof bottle, action: ReturnType<typeof getTickets>) {
     try {
@@ -13,8 +12,6 @@ function* getTicketsAsync(services: typeof bottle, action: ReturnType<typeof get
         yield put(addTickets(response.tickets));
 
         if (response.stop) {
-            const sort = yield select(searchGetSearchSort);
-            yield put(sortTickets(sort));
             yield put(setStatus(searchStatus.completed));
         } else {
             yield put(getTickets(action.searchId));
