@@ -6,7 +6,7 @@ import Ticket from "src/models/ticket";
 import { addTickets, getTickets, sortTickets } from "./actions";
 import { setStatus } from "src/store/search/actions";
 import { searchStatus } from "src/store/searchStatus";
-import { IStore } from "src/store/rootReducer";
+import { searchGetSearchSort } from "src/store/rootSelector";
 
 function* getTicketsAsync(services: typeof bottle, action: ReturnType<typeof getTickets>) {
     try {
@@ -16,7 +16,7 @@ function* getTicketsAsync(services: typeof bottle, action: ReturnType<typeof get
         if (response.tickets) {
             yield put(addTickets(response.tickets.map((ticket: IApiTicket) => new Ticket(ticket))));
             if (response.stop === true) {
-                const sort = yield select((state: IStore) => state.search.sort);
+                const sort = yield select(searchGetSearchSort);
                 yield put(sortTickets(sort));
                 yield put(setStatus(searchStatus.completed));
             } else {
