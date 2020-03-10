@@ -1,53 +1,40 @@
 import { createSelector } from "reselect";
 import { IStore } from "src/store/rootReducer";
 import { getSearchId, getStatus, getSort } from "src/store/search/selectors";
-import Ticket from "src/models/ticket";
+import Ticket, { sortPrice, sortTime } from "src/models/ticket";
 import { typeSort } from "./typeSort";
 
-export const searchState = (state: IStore) => state.search;
+export const searchState = (state: Readonly<IStore>) => state.search;
 export const searchGetSearchId = createSelector(searchState, getSearchId);
 export const searchGetSearchStatus = createSelector(searchState, getStatus);
 export const searchGetSearchSort = createSelector(searchState, getSort);
 
-export const ticketState = (state: IStore) => state.tickets;
-export const ticketStateSort = (state: IStore) => {
-    state.tickets = state.tickets.sort((a: Ticket, b: Ticket) => {
-        switch (state.search.sort) {
-            case typeSort.time:
-                let a_duration = a.segments.from.duration + a.segments.to.duration;
-                let b_duration = b.segments.from.duration + b.segments.to.duration;
-                if (a_duration < b_duration) return -1;
-                if (a_duration > b_duration) return 1;
-                break;
-            case typeSort.price:
-            default:
-                if (a.price < b.price) return -1;
-                if (a.price > b.price) return 1;
-                break;
-        }
-        return 0;
-    });
-    return state;
+export const ticketState = (state: Readonly<IStore>) => state.tickets;
+export const ticketStateSort = (state: Readonly<IStore>) => {
+    const newState = { ...state };
+    switch (newState.search.sort) {
+        case typeSort.time:
+            newState.tickets = sortTime(newState.tickets);
+            break;
+        case typeSort.price:
+        default:
+            newState.tickets = sortPrice(newState.tickets);
+            break;
+    }
+    return newState;
 };
 export const ticketsGetTicketsSort = createSelector(ticketStateSort, ticketState);
+export const ticketStateFilterNumberStops = (state: Readonly<IStore>) => {
+    const newState = { ...state };
+    const filterNumberStops = newState.search.filterNumberStops;
+    if (filterNumberStops.length === 0) return newState;
 
-export const ticketStateFilterNumberStops = (state: IStore) => {
-    const filterNumberStops = state.search.filterNumberStops;
-    if (!filterNumberStops) return state;
-
-    state.tickets = state.tickets.filter((item: Ticket) => {
-        const arrayNumberStopsTicket = [
-            item.segments.from.stops.size.toString(),
-            item.segments.to.stops.size.toString()
-        ];
+    newState.tickets = newState.tickets.filter((item: Ticket) => {
+        const arrayNumberStopsTicket = [item.segments.from.stops.size, item.segments.to.stops.size];
         return arrayNumberStopsTicket.every(NumberStopsTicket => filterNumberStops.includes(NumberStopsTicket));
     });
-    return state;
+    return newState;
 };
 export const ticketsGetTicketsFilter = createSelector(ticketStateFilterNumberStops, ticketState);
-
-export const ticketsGetTicketsFilterAndSort = createSelector(
-    ticketStateFilterNumberStops,
-    ticketStateSort,
-    ticketState
-);
+export const ticketStateFilterAndSort = createSelector(ticketStateFilterNumberStops, ticketStateSort);
+export const ticketsGetTicketsFilterAndSort = createSelector(ticketStateFilterAndSort, ticketState);
