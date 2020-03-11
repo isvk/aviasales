@@ -11,6 +11,7 @@ import services from "./services";
 import * as serviceWorker from "./serviceWorker";
 import App from "./App";
 
+import "reset-css";
 import "./index.css";
 
 export const history = createBrowserHistory();

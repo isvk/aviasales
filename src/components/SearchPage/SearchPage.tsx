@@ -1,18 +1,21 @@
 import React from "react";
+import styled from "styled-components";
 import useCustomDispatch from "src/hooks/useCustomDispatch";
 import useCustomSelector from "src/hooks/useCustomSelector";
 import { getSearchId } from "src/store/search/actions";
-import { searchGetSearchId, searchGetSearchStatus, ticketState } from "src/store/rootSelector";
+import { searchGetSearchId, searchGetSearchStatus } from "src/store/rootSelector";
 import { getTickets } from "src/store/tickets/actions";
 import { searchStatus } from "src/store/searchStatus";
+import ListTickets from "./ListTickets/ListTickets";
 
-import "./SearchPage.scss";
+const Wrapper = styled.div`
+    width: 542px; //hardcode временно
+`;
 
 export default function SearchPage() {
     const dispatch = useCustomDispatch();
     const searchId = useCustomSelector(searchGetSearchId);
     const status = useCustomSelector(searchGetSearchStatus);
-    const tickets = useCustomSelector(ticketState);
 
     if (searchId === "") {
         dispatch(getSearchId());
@@ -23,10 +26,11 @@ export default function SearchPage() {
     }
 
     return (
-        <div className="searchPage">
+        <Wrapper>
             <h1>Aviasales Test Task</h1>
             {status === searchStatus.started && <div>Идёт загрузка</div>}
-            {status === searchStatus.completed && <div>Загрузка завершена. Найдено вариантов: {tickets.size - 1}</div>}
-        </div>
+            {status === searchStatus.completed && <div>Загрузка завершена</div>}
+            {status === searchStatus.completed && <ListTickets />}
+        </Wrapper>
     );
 }
