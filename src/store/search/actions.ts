@@ -23,3 +23,9 @@ export const setFilterNumberStops = (value: Set<number>) =>
         type: types.SET_FILTER_NUMBER_STOPS,
         value
     } as const);
+
+export const setSort = (value: number) =>
+    ({
+        type: types.SET_SORT,
+        value
+    } as const);

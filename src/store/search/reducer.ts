@@ -19,6 +19,9 @@ const reducer = (state: TStoreSearch = new Search(), action: ActionTypesInfer<ty
         case types.SET_FILTER_NUMBER_STOPS:
             return state.set("filterNumberStops", action.value);
 
+        case types.SET_SORT:
+            return state.set("sort", action.value);
+
         default:
             return state;
     }
