@@ -1,4 +1,5 @@
 import * as types from "./types";
+import { Set } from "immutable";
 
 export const getSearchId = () =>
     ({
@@ -15,4 +16,10 @@ export const setStatus = (status: number) =>
     ({
         type: types.SET_STATUS,
         status
+    } as const);
+
+export const setFilterNumberStops = (value: Set<number>) =>
+    ({
+        type: types.SET_FILTER_NUMBER_STOPS,
+        value
     } as const);
