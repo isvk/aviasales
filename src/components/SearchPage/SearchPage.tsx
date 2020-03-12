@@ -7,6 +7,7 @@ import { searchGetSearchId, searchGetSearchStatus } from "src/store/rootSelector
 import { getTickets } from "src/store/tickets/actions";
 import { searchStatus } from "src/store/searchStatus";
 import ListTickets from "./ListTickets/ListTickets";
+import ListFilters from "./ListFilters/ListFilters";
 
 const Wrapper = styled.div`
     width: 542px; //hardcode временно
@@ -28,6 +29,7 @@ export default function SearchPage() {
     return (
         <Wrapper>
             <h1>Aviasales Test Task</h1>
+            <ListFilters />
             {status === searchStatus.started && <div>Идёт загрузка</div>}
             {status === searchStatus.completed && <div>Загрузка завершена</div>}
             {status === searchStatus.completed && <ListTickets />}
