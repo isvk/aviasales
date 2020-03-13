@@ -36,6 +36,13 @@ export const ticketStateFilterNumberStops = (state: Readonly<IStore>) => {
     );
     return newState;
 };
+
+export const ticketStateLimit = (state: Readonly<IStore>) => {
+    return { ...state, tickets: state.tickets.slice(0, state.search.limit) };
+};
+
 export const ticketsGetTicketsFilter = createSelector(ticketStateFilterNumberStops, ticketState);
 export const ticketStateFilterAndSort = createSelector(ticketStateFilterNumberStops, ticketStateSort);
 export const ticketsGetTicketsFilterAndSort = createSelector(ticketStateFilterAndSort, ticketState);
+export const ticketStateFilterAndSortAndLimit = createSelector(ticketStateFilterAndSort, ticketStateLimit);
+export const ticketsGetTicketsFilterAndSortAndLimit = createSelector(ticketStateFilterAndSortAndLimit, ticketState);

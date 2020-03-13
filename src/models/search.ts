@@ -7,13 +7,15 @@ export interface ISearch {
     status: searchStatus;
     sort: typeSort;
     filterNumberStops: Set<number>;
+    limit: number;
 }
 
 const initialSearch: ISearch = {
     searchId: "",
     status: searchStatus.notStarted,
     sort: typeSort.price,
-    filterNumberStops: Set([])
+    filterNumberStops: Set([]),
+    limit: 5
 };
 
 export default class Search extends Record(initialSearch) {}
