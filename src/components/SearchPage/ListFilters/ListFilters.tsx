@@ -10,8 +10,7 @@ export default function ListFilters() {
     );
 }
 const Wrapper = styled.div`
-    margin: 20px;
-    padding: 20px 0;
+    padding: 10px 0;
     background: #ffffff;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     border-radius: 5px;

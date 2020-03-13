@@ -46,11 +46,11 @@ const filterItems = [
 ];
 
 const Title = styled.div`
+    padding: 10px 20px;
     font-weight: 600;
     font-size: 12px;
     line-height: 12px;
     letter-spacing: 0.5px;
     text-transform: uppercase;
     color: #4a4a4a;
-    margin: 0 20px 10px 20px;
 `;

@@ -46,10 +46,12 @@ const Label = styled.label`
     padding: 10px 20px;
     font-size: 13px;
     line-height: 20px;
+
     &:hover {
         cursor: pointer;
         background: #f1fcff;
     }
+
     &:before {
         content: "";
         height: 20px;
@@ -71,6 +73,7 @@ const Check = styled(IconCheck)`
     position: absolute;
     left: 21px;
     top: 10px;
+
     ${Checkbox}:checked + ${Label} > & {
         height: 18px;
     }

@@ -29,7 +29,7 @@ const getFormatPrice = (price: number) => {
 };
 
 const Wrapper = styled.div`
-    margin: 20px;
+    margin: 20px 0;
     padding: 20px;
     background: #ffffff;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -38,15 +38,13 @@ const Wrapper = styled.div`
 
 const Header = styled.div`
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    height: 36px;
-    margin-right: 30px;
+    justify-content: space-between;
+    padding-right: 30px;
+    padding-bottom: 20px;
 `;
 
-const ListSegment = styled.div`
-    margin-top: 20px;
-`;
+const ListSegment = styled.div``;
 
 const Price = styled.div`
     font-weight: 600;

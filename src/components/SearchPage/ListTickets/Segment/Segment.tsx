@@ -16,7 +16,7 @@ export default function Segment(props: ISegmentProps) {
                 <SecondLine>{getTimeToString(props.segment.date, props.segment.duration)}</SecondLine>
             </Route>
             <Duration>
-                <FirstLine>В ПУТИ</FirstLine>
+                <FirstLine>В пути</FirstLine>
                 <SecondLine>{getDurationToString(props.segment.duration)}</SecondLine>
             </Duration>
             <Stops>
@@ -46,19 +46,22 @@ const getTimeToString = (date: string, duration: number) => {
 const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
-    margin: 10px 0;
+
+    &:not(:first-child) {
+        padding-top: 10px;
+    }
 `;
 
 const Route = styled.div`
-    flex-basis: 33.33%;
+    width: 140px;
 `;
 
 const Duration = styled.div`
-    flex-basis: 33.33%;
+    width: 140px;
 `;
 
 const Stops = styled.div`
-    flex-basis: 33.33%;
+    width: 140px;
 `;
 
 const FirstLine = styled.div`
@@ -66,6 +69,8 @@ const FirstLine = styled.div`
     font-size: 12px;
     line-height: 18px;
     color: #a0b0b9;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
 `;
 
 const SecondLine = styled.div`
@@ -73,4 +78,5 @@ const SecondLine = styled.div`
     font-size: 14px;
     line-height: 21px;
     color: #4a4a4a;
+    letter-spacing: 0.5px;
 `;

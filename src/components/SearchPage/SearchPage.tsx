@@ -6,13 +6,10 @@ import { getSearchId } from "src/store/search/actions";
 import { searchGetSearchId, searchGetSearchStatus } from "src/store/rootSelector";
 import { getTickets } from "src/store/tickets/actions";
 import { searchStatus } from "src/store/searchStatus";
-import ListTickets from "./ListTickets/ListTickets";
+import Logo from "./Logo/Logo";
 import ListFilters from "./ListFilters/ListFilters";
 import ListSorts from "./ListSorts/ListSorts";
-
-const Wrapper = styled.div`
-    width: 542px; //hardcode временно
-`;
+import ListTickets from "./ListTickets/ListTickets";
 
 export default function SearchPage() {
     const dispatch = useCustomDispatch();
@@ -29,12 +26,50 @@ export default function SearchPage() {
 
     return (
         <Wrapper>
-            <h1>Aviasales Test Task</h1>
-            <ListSorts />
-            <ListFilters />
-            {status === searchStatus.started && <div>Идёт загрузка</div>}
-            {status === searchStatus.completed && <div>Загрузка завершена</div>}
-            {status === searchStatus.completed && <ListTickets />}
+            <Container>
+                <Header>
+                    <Logo />
+                </Header>
+                <Body>
+                    <LeftMenu>
+                        <ListFilters />
+                    </LeftMenu>
+                    <Content>
+                        <ListSorts />
+                        {status === searchStatus.completed && <ListTickets />}
+                    </Content>
+                </Body>
+            </Container>
         </Wrapper>
     );
 }
+
+const Wrapper = styled.div`
+    display: flex;
+    justify-content: center;
+`;
+
+const Container = styled.div`
+    width: 754px;
+`;
+
+const Header = styled.div`
+    display: flex;
+    justify-content: center;
+    padding: 50px 0;
+`;
+
+const Body = styled.div`
+    display: flex;
+    width: 100%;
+`;
+
+const LeftMenu = styled.div`
+    width: 232px;
+    min-width: 232px;
+    margin-right: 20px;
+`;
+
+const Content = styled.div`
+    width: 100%;
+`;
