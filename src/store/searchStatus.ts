@@ -1,5 +1,5 @@
 export enum searchStatus {
-    notStarted,
-    started,
-    completed
+    isNotLoadedSearchId,
+    isLoadedSearchId,
+    isLoadedTickets
 }

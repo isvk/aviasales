@@ -12,7 +12,7 @@ export interface ISearch {
 
 const initialSearch: ISearch = {
     searchId: "",
-    status: searchStatus.notStarted,
+    status: searchStatus.isNotLoadedSearchId,
     sort: typeSort.price,
     filterNumberStops: Set([]),
     limit: 5

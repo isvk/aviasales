@@ -34,7 +34,7 @@ export interface IApiTickets {
 export default class ApiTicket {
     constructor(private http: IHttp, private url: string = "tickets") {}
 
-    getTickets = (searchId: string) => {
+    loadTickets = (searchId: string) => {
         return this.http.get(this.url + "?searchId=" + searchId).then((response: IApiTickets) => {
             return {
                 tickets: response.tickets.map((ticket: IApiTicket) => {

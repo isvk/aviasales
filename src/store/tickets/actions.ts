@@ -1,9 +1,9 @@
 import * as types from "./types";
 import Ticket from "src/models/ticket";
 
-export const getTickets = (searchId: string) =>
+export const loadTickets = (searchId: string) =>
     ({
-        type: types.GET_TICKETS,
+        type: types.LOAD_TICKETS,
         searchId
     } as const);
 

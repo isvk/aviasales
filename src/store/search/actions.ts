@@ -1,14 +1,14 @@
 import * as types from "./types";
 import { Set } from "immutable";
 
-export const getSearchId = () =>
+export const loadSearchId = () =>
     ({
-        type: types.GET_SEARCH_ID
+        type: types.LOAD_SEARCH_ID
     } as const);
 
-export const getSearchIdSuccess = (id: string) =>
+export const loadSearchIdSuccess = (id: string) =>
     ({
-        type: types.GET_SEARCH_ID_SUCCESS,
+        type: types.LOAD_SEARCH_ID_SUCCESS,
         id
     } as const);
 

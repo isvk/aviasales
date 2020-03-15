@@ -1,30 +1,29 @@
 import bottle from "src/services";
 import { call, put, takeEvery } from "@redux-saga/core/effects";
 import * as types from "./types";
-import { addTickets, getTickets } from "./actions";
+import { addTickets, loadTickets } from "./actions";
 import { setStatus } from "src/store/search/actions";
 import { searchStatus } from "src/store/searchStatus";
 
-function* getTicketsAsync(services: typeof bottle, action: ReturnType<typeof getTickets>) {
+function* loadTicketsAsync(services: typeof bottle, action: ReturnType<typeof loadTickets>) {
     try {
-        yield put(setStatus(searchStatus.started));
-        let response = yield call(services.container.ApiTicket.getTickets, action.searchId);
+        let response = yield call(services.container.ApiTicket.loadTickets, action.searchId);
         yield put(addTickets(response.tickets));
 
         if (response.stop) {
-            yield put(setStatus(searchStatus.completed));
+            yield put(setStatus(searchStatus.isLoadedTickets));
         } else {
-            yield put(getTickets(action.searchId));
+            yield put(loadTickets(action.searchId));
         }
     } catch (e) {
         if (e.status === 500) {
-            yield put(getTickets(action.searchId));
+            yield put(loadTickets(action.searchId));
         } else {
-            yield put(setStatus(searchStatus.completed));
+            yield put(setStatus(searchStatus.isLoadedTickets));
         }
     }
 }
 
-export default function* cardSaga(services: typeof bottle) {
-    yield takeEvery(types.GET_TICKETS, getTicketsAsync, services);
+export default function* ticketSaga(services: typeof bottle) {
+    yield takeEvery(types.LOAD_TICKETS, loadTicketsAsync, services);
 }

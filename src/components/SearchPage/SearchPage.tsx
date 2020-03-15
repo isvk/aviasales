@@ -1,28 +1,17 @@
 import React from "react";
 import styled from "styled-components";
-import useCustomDispatch from "src/hooks/useCustomDispatch";
 import useCustomSelector from "src/hooks/useCustomSelector";
-import { getSearchId } from "src/store/search/actions";
-import { searchGetSearchId, searchGetSearchStatus } from "src/store/rootSelector";
-import { getTickets } from "src/store/tickets/actions";
+import { searchGetSearchStatus } from "src/store/rootSelector";
 import { searchStatus } from "src/store/searchStatus";
+import LoadSearchId from "../LoadSearchId/LoadSearchId";
+import LoadTickets from "../LoadTickets/LoadTickets";
 import Logo from "./Logo/Logo";
 import ListFilters from "./ListFilters/ListFilters";
 import ListSorts from "./ListSorts/ListSorts";
 import ListTickets from "./ListTickets/ListTickets";
 
 export default function SearchPage() {
-    const dispatch = useCustomDispatch();
-    const searchId = useCustomSelector(searchGetSearchId);
     const status = useCustomSelector(searchGetSearchStatus);
-
-    if (searchId === "") {
-        dispatch(getSearchId());
-    } else {
-        if (status === searchStatus.notStarted) {
-            dispatch(getTickets(searchId));
-        }
-    }
 
     return (
         <Wrapper>
@@ -36,7 +25,9 @@ export default function SearchPage() {
                     </LeftMenu>
                     <Content>
                         <ListSorts />
-                        {status === searchStatus.completed && <ListTickets />}
+                        {status === searchStatus.isNotLoadedSearchId && <LoadSearchId />}
+                        {status === searchStatus.isLoadedSearchId && <LoadTickets />}
+                        {status === searchStatus.isLoadedTickets && <ListTickets />}
                     </Content>
                 </Body>
             </Container>

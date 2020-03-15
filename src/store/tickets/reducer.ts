@@ -8,7 +8,7 @@ export type TStoreTicket = List<Ticket>;
 
 const reducer = (state: TStoreTicket = List([]), action: ActionTypesInfer<typeof actions>) => {
     switch (action.type) {
-        case types.GET_TICKETS:
+        case types.LOAD_TICKETS:
             return state;
 
         case types.ADD_TICKETS:
