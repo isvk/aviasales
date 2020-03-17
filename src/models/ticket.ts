@@ -1,5 +1,6 @@
 import { List, Record } from "immutable";
 import Segments from "./segments";
+import ISearch from "./search";
 
 export interface ITicket {
     price: number;
@@ -29,6 +30,18 @@ export const sortPrice = (tickets: Readonly<List<Ticket>>) => {
         if (a.price > b.price) return 1;
         return 0;
     });
+};
+
+export const filterNumberStops = (tickets: Readonly<List<Ticket>>, filters: ISearch["filterNumberStops"]) => {
+    return tickets.filter((ticket: Ticket) =>
+        [ticket.segments.from.stops.size, ticket.segments.to.stops.size].every(numberStopsTicket =>
+            filters.has(numberStopsTicket)
+        )
+    );
+};
+
+export const limit = (tickets: Readonly<List<Ticket>>, count: number) => {
+    return tickets.slice(0, count);
 };
 
 export default class Ticket extends Record(initialTicket) implements ITicket {}

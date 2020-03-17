@@ -1,7 +1,7 @@
 import { createSelector } from "reselect";
 import { IStore } from "src/store/rootReducer";
 import { getSearchId, getStatus, getSort, getFilterNumberStops } from "src/store/search/selectors";
-import Ticket, { sortPrice, sortTime } from "src/models/ticket";
+import { sortPrice, sortTime, filterNumberStops, limit } from "src/models/ticket";
 import { typeSort } from "./typeSort";
 
 export const searchState = (state: Readonly<IStore>) => state.search;
@@ -12,33 +12,24 @@ export const searchGetSearchFilterNumberStops = createSelector(searchState, getF
 
 export const ticketState = (state: Readonly<IStore>) => state.tickets;
 export const ticketStateSort = (state: Readonly<IStore>) => {
-    const newState = { ...state };
-    switch (newState.search.sort) {
+    switch (state.search.sort) {
         case typeSort.time:
-            newState.tickets = sortTime(newState.tickets);
-            break;
+            return { ...state, tickets: sortTime(state.tickets) };
         case typeSort.price:
+            return { ...state, tickets: sortPrice(state.tickets) };
         default:
-            newState.tickets = sortPrice(newState.tickets);
-            break;
+            return state;
     }
-    return newState;
 };
 export const ticketsGetTicketsSort = createSelector(ticketStateSort, ticketState);
 export const ticketStateFilterNumberStops = (state: Readonly<IStore>) => {
     if (state.search.filterNumberStops.size === 0) return state;
-
-    const newState = { ...state };
-    newState.tickets = newState.tickets.filter((item: Ticket) =>
-        [item.segments.from.stops.size, item.segments.to.stops.size].every(numberStopsTicket =>
-            newState.search.filterNumberStops.has(numberStopsTicket)
-        )
-    );
-    return newState;
+    return { ...state, tickets: filterNumberStops(state.tickets, state.search.filterNumberStops) };
 };
 
 export const ticketStateLimit = (state: Readonly<IStore>) => {
-    return { ...state, tickets: state.tickets.slice(0, state.search.limit) };
+    if (state.search.limit === 0) return state;
+    return { ...state, tickets: limit(state.tickets, state.search.limit) };
 };
 
 export const ticketsGetTicketsFilter = createSelector(ticketStateFilterNumberStops, ticketState);
