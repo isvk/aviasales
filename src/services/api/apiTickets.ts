@@ -39,22 +39,15 @@ export default class ApiTicket {
             return {
                 tickets: response.tickets.map((ticket: IApiTicket) => {
                     return new Ticket({
-                        price: ticket.price,
-                        carrier: ticket.carrier,
+                        ...ticket,
                         segments: new Segments({
                             from: new Segment({
-                                origin: ticket.segments[0].origin,
-                                destination: ticket.segments[0].destination,
-                                date: ticket.segments[0].date,
-                                stops: List(ticket.segments[0].stops),
-                                duration: ticket.segments[0].duration
+                                ...ticket.segments[0],
+                                stops: List(ticket.segments[0].stops)
                             }),
                             to: new Segment({
-                                origin: ticket.segments[1].origin,
-                                destination: ticket.segments[1].destination,
-                                date: ticket.segments[1].date,
-                                stops: List(ticket.segments[1].stops),
-                                duration: ticket.segments[1].duration
+                                ...ticket.segments[1],
+                                stops: List(ticket.segments[1].stops)
                             })
                         })
                     });
