@@ -1,5 +1,5 @@
 import * as types from "./types";
-import { Set } from "immutable";
+import ISearch from "src/models/search";
 
 export const loadSearchId = () =>
     ({
@@ -18,7 +18,7 @@ export const setStatus = (status: number) =>
         status
     } as const);
 
-export const setFilterNumberStops = (value: Set<number>) =>
+export const setFilterNumberStops = (value: ISearch["filterNumberStops"]) =>
     ({
         type: types.SET_FILTER_NUMBER_STOPS,
         value
