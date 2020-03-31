@@ -5,7 +5,8 @@ export interface IApiSearch {
 }
 
 export default class ApiSearch {
-    constructor(private http: IHttp, private url: string = "search") {}
+    constructor(private http: IHttp) {}
+    private url: string = "search";
 
     loadSearchId = () => this.http.get(this.url).then((response: IApiSearch) => response.searchId);
 }
