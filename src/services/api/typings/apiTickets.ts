@@ -1,4 +1,4 @@
-import {IApiTicket} from "./apiTicket";
+import { IApiTicket } from "./apiTicket";
 
 export interface IApiTickets {
     tickets: IApiTicket[];

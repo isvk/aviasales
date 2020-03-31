@@ -1,8 +1,8 @@
-import {List} from "immutable";
+import { List } from "immutable";
 import Ticket from "src/models/ticket";
 import Segments from "src/models/segments";
 import Segment from "src/models/segment";
-import {IApiTicket} from "./typings/apiTicket";
+import { IApiTicket } from "./typings/apiTicket";
 
 export const apiTicketToModelTicket = (ticket: IApiTicket) => {
     return new Ticket({
@@ -18,4 +18,4 @@ export const apiTicketToModelTicket = (ticket: IApiTicket) => {
             })
         })
     });
-}
+};

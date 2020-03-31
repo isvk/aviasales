@@ -1,6 +1,6 @@
 import { IHttp } from "../IHttp";
-import {apiTicketToModelTicket} from "./apiTicketToModelTicket";
-import {IApiTickets} from "./typings/apiTickets"
+import { IApiTickets } from "./typings/apiTickets";
+import { apiTicketToModelTicket } from "./apiTicketToModelTicket";
 
 export default class ApiTicket {
     constructor(private http: IHttp) {}
@@ -9,7 +9,7 @@ export default class ApiTicket {
     loadTickets = (searchId: string) => {
         return this.http.get(this.url + "?searchId=" + searchId).then((response: IApiTickets) => {
             return {
-                tickets: response.tickets.map((ticket) => apiTicketToModelTicket(ticket)),
+                tickets: response.tickets.map(ticket => apiTicketToModelTicket(ticket)),
                 stop: response.stop
             };
         });
