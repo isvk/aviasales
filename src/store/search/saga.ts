@@ -1,14 +1,16 @@
 import { put, call, takeEvery } from "@redux-saga/core/effects";
 import bottle from "src/services/index";
 import * as types from "./types";
-import { loadSearchIdSuccess } from "./actions";
+import { loadSearchIdSuccess, setStatus } from "./actions";
+import { searchStatus } from "../searchStatus";
 
 function* loadSearchIdAsync(services: typeof bottle) {
     try {
         const id = yield call(services.container.ApiSearch.loadSearchId);
         yield put(loadSearchIdSuccess(id));
     } catch (e) {
-        console.log(e);
+        yield put(setStatus(searchStatus.isErrorServer));
+        console.error(e);
     }
 }
 

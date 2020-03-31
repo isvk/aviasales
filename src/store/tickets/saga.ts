@@ -19,7 +19,8 @@ function* loadTicketsAsync(services: typeof bottle, action: ReturnType<typeof lo
         if (e.status === 500) {
             yield put(loadTickets(action.searchId));
         } else {
-            yield put(setStatus(searchStatus.isLoadedTickets));
+            yield put(setStatus(searchStatus.isErrorServer));
+            console.error(e);
         }
     }
 }

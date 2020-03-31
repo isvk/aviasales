@@ -1,5 +1,6 @@
 export enum searchStatus {
     isNotLoadedSearchId,
     isLoadedSearchId,
-    isLoadedTickets
+    isLoadedTickets,
+    isErrorServer
 }

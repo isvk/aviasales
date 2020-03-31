@@ -4,6 +4,7 @@ import useCustomSelector from "src/hooks/useCustomSelector";
 import { searchGetSearchStatus } from "src/store/rootSelector";
 import { searchStatus } from "src/store/searchStatus";
 import Preload from "../Preload/Preload";
+import Warning from "../Warning/Warning";
 import LoadSearchId from "../LoadSearchId/LoadSearchId";
 import LoadTickets from "../LoadTickets/LoadTickets";
 import Logo from "./Logo/Logo";
@@ -28,8 +29,11 @@ export default function SearchPage() {
                         <ListSorts />
                         {status === searchStatus.isNotLoadedSearchId && <LoadSearchId />}
                         {status === searchStatus.isLoadedSearchId && <LoadTickets />}
-                        {status !== searchStatus.isLoadedTickets && <Preload text="Загрузка..." />}
+                        {status !== searchStatus.isLoadedTickets && status !== searchStatus.isErrorServer && (
+                            <Preload text="Загрузка..." />
+                        )}
                         {status === searchStatus.isLoadedTickets && <ListTickets />}
+                        {status === searchStatus.isErrorServer && <Warning text="Ошибка сервера" />}
                     </Content>
                 </Body>
             </Container>
