@@ -68,7 +68,7 @@
         (a.o = function(e, r) {
             return Object.prototype.hasOwnProperty.call(e, r);
         }),
-        (a.p = "/");
+        (a.p = "/aviasales/build/");
     var l = (this.webpackJsonpaviasales = this.webpackJsonpaviasales || []),
         i = l.push.bind(l);
     (l.push = r), (l = l.slice());
@@ -76,4 +76,4 @@
     var p = i;
     t();
 })([]);
-//# sourceMappingURL=runtime-main.498b52e9.js.map
+//# sourceMappingURL=runtime-main.588f9683.js.map

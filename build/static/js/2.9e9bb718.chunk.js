@@ -1,4 +1,4 @@
-/*! For license information please see 2.22b52a46.chunk.js.LICENSE.txt */
+/*! For license information please see 2.9e9bb718.chunk.js.LICENSE.txt */
 (this.webpackJsonpaviasales = this.webpackJsonpaviasales || []).push([
     [2],
     [
@@ -532,14 +532,14 @@
                         ("undefined" !== typeof e &&
                             (Object({
                                 NODE_ENV: "production",
-                                PUBLIC_URL: "",
+                                PUBLIC_URL: "/aviasales/build",
                                 WDS_SOCKET_HOST: void 0,
                                 WDS_SOCKET_PATH: void 0,
                                 WDS_SOCKET_PORT: void 0
                             }).REACT_APP_SC_ATTR ||
                                 Object({
                                     NODE_ENV: "production",
-                                    PUBLIC_URL: "",
+                                    PUBLIC_URL: "/aviasales/build",
                                     WDS_SOCKET_HOST: void 0,
                                     WDS_SOCKET_PATH: void 0,
                                     WDS_SOCKET_PORT: void 0
@@ -551,14 +551,14 @@
                         ("undefined" !== typeof e &&
                             (Object({
                                 NODE_ENV: "production",
-                                PUBLIC_URL: "",
+                                PUBLIC_URL: "/aviasales/build",
                                 WDS_SOCKET_HOST: void 0,
                                 WDS_SOCKET_PATH: void 0,
                                 WDS_SOCKET_PORT: void 0
                             }).REACT_APP_SC_DISABLE_SPEEDY ||
                                 Object({
                                     NODE_ENV: "production",
-                                    PUBLIC_URL: "",
+                                    PUBLIC_URL: "/aviasales/build",
                                     WDS_SOCKET_HOST: void 0,
                                     WDS_SOCKET_PATH: void 0,
                                     WDS_SOCKET_PORT: void 0
@@ -17585,4 +17585,4 @@
         function(e, t, n) {}
     ]
 ]);
-//# sourceMappingURL=2.22b52a46.chunk.js.map
+//# sourceMappingURL=2.9e9bb718.chunk.js.map
