@@ -14,7 +14,7 @@ import App from "./App";
 import "reset-css";
 import "./index.css";
 
-export const history = createBrowserHistory();
+export const history = createBrowserHistory({ basename: "/aviasales/build/" });
 const sagaMiddleware = createSagaMiddleware();
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

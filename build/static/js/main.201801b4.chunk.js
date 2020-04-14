@@ -1009,7 +1009,7 @@
                 return $t;
             });
             var Xt,
-                $t = Object(f.a)(),
+                $t = Object(f.a)({ basename: "/aviasales/build/" }),
                 Gt = Object(h.a)(),
                 Vt = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || s.d,
                 Qt = Object(s.e)(k($t), Vt(Object(s.a)(Gt, Object(d.a)($t))));
@@ -1044,4 +1044,4 @@
     },
     [[54, 1, 2]]
 ]);
-//# sourceMappingURL=main.2a56d733.chunk.js.map
+//# sourceMappingURL=main.201801b4.chunk.js.map

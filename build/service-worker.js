@@ -13,7 +13,7 @@
 
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
-importScripts("/aviasales/build/precache-manifest.a66df8089dcded72bf0cdf44f7134c24.js");
+importScripts("/aviasales/build/precache-manifest.32ef6dddb90ce509edc6c5e09d6d4e2d.js");
 
 self.addEventListener("message", event => {
     if (event.data && event.data.type === "SKIP_WAITING") {
