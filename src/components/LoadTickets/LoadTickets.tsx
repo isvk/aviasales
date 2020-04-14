@@ -10,7 +10,8 @@ export default function LoadTickets() {
 
     useEffect(() => {
         dispatch(loadTickets(searchId));
-    }, [dispatch]);
+        // eslint-disable-next-line
+    }, []);
 
     return <></>;
 }

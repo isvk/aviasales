@@ -7,7 +7,8 @@ export default function LoadSearchId() {
 
     useEffect(() => {
         dispatch(loadSearchId());
-    }, [dispatch]);
+        // eslint-disable-next-line
+    }, []);
 
     return <></>;
 }
